@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ателье «Портняжка» · концепт сайта</title>
+<meta name="description" content="Концепт сайта ателье «Портняжка» в Краснодаре: ремонт и пошив одежды на Черкасской, 129/1. Демо, не официальный сайт.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Сайт для «Портняжка»">
+<meta property="og:description" content="Подшить, ушить, заменить молнию. Цены, цена по фото в MAX и как найти вход в цоколь.">
+<meta property="og:image" content="https://alexandrlidev.github.io/portnyazhka-demo/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://alexandrlidev.github.io/portnyazhka-demo/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--rose:#B3123F;--rose-d:#8C0D31;--rose-soft:#F8E3E8;--ink:#1D1519;--plum:#2A1C22;--linen:#F5EFE7;--chalk:#FFFDF9;--gold:#C79A3B;--tape:#EBC75A;--muted:#6F6266;--line:#E6DCD1;--ok:#1E7F4E;--bad:#B3261E;--r:16px;--r-lg:24px;--shadow:0 14px 34px -18px rgba(40,10,20,.35)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{font-family:"Golos Text",system-ui,sans-serif;background:var(--linen);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;letter-spacing:-.01em;line-height:1.02}
+.kicker{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--rose)}
+
+.ribbon{background:var(--ink);color:#dcd3d6;font-size:13px;padding:8px 0}
+.ribbon .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.ribbon b{color:var(--tape)}
+.ribbon a{color:#fff;font-weight:600}
+
+/* measuring tape */
+.tape{height:14px;background:
+ repeating-linear-gradient(90deg,rgba(29,21,25,.75) 0 1px,transparent 1px 10px) bottom/100% 5px no-repeat,
+ repeating-linear-gradient(90deg,rgba(29,21,25,.9) 0 1.5px,transparent 1.5px 50px) bottom/100% 9px no-repeat,
+ var(--tape)}
+
+header.top{position:sticky;top:0;z-index:50;background:rgba(255,253,249,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:16px;height:68px}
+.logo{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.logo i{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:16px;color:var(--rose);margin-left:2px}
+.logo b{font-family:"Golos Text",sans-serif;font-weight:700;font-size:19px;letter-spacing:.14em;color:var(--rose)}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:6px 12px;border-radius:99px;background:#fff;border:1px solid var(--line);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(30,127,78,.15)}
+.dot.closed{background:var(--bad);box-shadow:0 0 0 4px rgba(179,38,30,.15)}
+nav.links{display:flex;gap:22px;font-weight:500;font-size:15px}
+nav.links a{text-decoration:none}
+nav.links a:hover{color:var(--rose)}
+.sp{flex:1}
+.phone{font-weight:600;text-decoration:none;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;transition:transform .15s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-rose{background:var(--rose);color:#fff}.btn-rose:hover{background:var(--rose-d)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-w{background:#fff;border:1px solid var(--line)}
+.btn-sm{padding:9px 16px;font-size:15px}
+
+/* hero */
+.hero{padding:44px 0 36px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(46px,6.4vw,84px);margin:14px 0 18px}
+.hero h1 em{color:var(--rose);font-style:italic}
+.lead{font-size:19px;color:#43363b;max-width:38ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 24px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips span{font-size:14px;color:var(--muted)}
+.chip{background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;font-weight:500;transition:border-color .15s,color .15s}
+.chip:hover{border-color:var(--rose);color:var(--rose)}
+.stage{position:relative;padding:0 0 0 40px}
+.stage .ph{border-radius:200px 200px var(--r-lg) var(--r-lg);overflow:hidden;aspect-ratio:3/4;background:#e9dfd5;box-shadow:var(--shadow)}
+.stage .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.htag{position:absolute;background:var(--chalk);border:1px solid var(--line);border-radius:6px 14px 14px 6px;padding:12px 16px 12px 30px;box-shadow:var(--shadow);font-size:14px;line-height:1.35}
+.htag:before{content:"";position:absolute;left:11px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;border:2px solid var(--gold);background:var(--linen)}
+.htag b{display:block;font-family:"Cormorant Garamond",serif;font-size:26px;line-height:1}
+.htag.t1{left:0;top:16%;transform:rotate(-4deg)}
+.htag.t2{right:-8px;bottom:10%;transform:rotate(3deg);background:var(--rose);color:#fff;border-color:var(--rose)}
+.htag.t2:before{background:var(--rose);border-color:#fff}
+.htag.t2 a{color:#fff}
+.ph-cap{position:absolute;left:52px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:3px 9px;border-radius:6px}
+
+section{padding:64px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(34px,4.4vw,54px);margin-top:6px}
+.sec-head p{color:var(--muted);max-width:44ch}
+
+/* services as price tickets */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.svc{position:relative;background:var(--chalk);border:1px solid var(--line);border-radius:var(--r);padding:22px 22px 20px;text-align:left;display:flex;flex-direction:column;gap:8px;transition:border-color .15s,transform .15s;overflow:hidden}
+.svc:after{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:repeating-linear-gradient(90deg,var(--rose) 0 10px,transparent 10px 16px)}
+.svc:hover{border-color:var(--rose);transform:translateY(-2px)}
+.svc-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ico{width:46px;height:46px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:grid;place-items:center}
+.svc h3{font-size:28px}
+.svc p{color:var(--muted);font-size:15px}
+.svc .price{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:baseline;font-weight:600}
+.svc .price b{font-family:"Cormorant Garamond",serif;font-size:26px;color:var(--rose)}
+.svc .more{font-size:14px;color:var(--muted);font-weight:500}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* urgent */
+.urgent{background:var(--plum);color:#fff;border-radius:32px;padding:48px;display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;position:relative;overflow:hidden}
+.urgent h2{font-size:clamp(36px,4.6vw,58px);margin:10px 0 16px}
+.urgent h2 em{color:var(--tape)}
+.urgent p{color:#d9cdd1;font-size:17px;max-width:44ch}
+.urgent .kicker{color:var(--tape)}
+.events{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px}
+.events span{border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:6px 12px;font-size:14px;color:#efe6e9}
+.steps{list-style:none;display:grid;gap:12px;margin:22px 0 26px}
+.steps li{display:flex;gap:12px;color:#efe6e9}
+.steps b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--rose);display:grid;place-items:center;font-size:14px}
+.chatbox{width:100%;max-width:330px;margin:0 auto;background:#F1ECEE;border-radius:30px;padding:12px;border:6px solid #120c0f;color:var(--ink)}
+.chat-head{display:flex;align-items:center;gap:8px;background:#fff;border-radius:16px;padding:8px 10px;font-size:13px}
+.chat-head .av{width:32px;height:32px;border-radius:50%;background:var(--rose);color:#fff;display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-weight:700;font-size:18px}
+.chat{display:flex;flex-direction:column;gap:8px;padding:12px 2px;min-height:330px;font-size:13px}
+.msg{max-width:86%;padding:8px 11px;border-radius:12px;opacity:0;transform:translateY(6px);transition:all .35s}
+.msg.show{opacity:1;transform:none}
+.msg.me{align-self:flex-end;background:#E4DDF7}
+.msg.them{align-self:flex-start;background:#fff}
+.msg .thumb{width:140px;height:100px;border-radius:8px;background:url(img/w-jeans.jpg) center/cover;margin-bottom:6px}
+.replay{color:#cbbec3;font-size:13px;text-decoration:underline;margin-top:10px}
+
+/* process */
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:var(--chalk);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.step .n{font-family:"Cormorant Garamond",serif;font-size:44px;color:var(--gold);line-height:1}
+.step h3{font-size:24px;margin:6px 0 6px}
+.step p{color:var(--muted);font-size:15px}
+.kids{margin-top:14px;display:flex;gap:12px;align-items:center;background:var(--rose-soft);border-radius:var(--r);padding:14px 18px;font-size:15px}
+.kids svg{flex:none;color:var(--rose)}
+
+/* works */
+.works{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.works figure{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:#e5dacf}
+.works figure:nth-child(1),.works figure:nth-child(6){grid-row:span 2;aspect-ratio:auto}
+.works img{width:100%;height:100%;object-fit:cover}
+.works figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 9px;background:linear-gradient(transparent,rgba(20,8,12,.72));color:#fff;font-size:14px;font-weight:600}
+
+.shop{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--chalk);border:1px dashed var(--gold);border-radius:var(--r);padding:16px 20px}
+.shop b{font-family:"Cormorant Garamond",serif;font-size:24px}
+
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.rev{background:var(--chalk);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column}
+.rev .q{font-family:"Cormorant Garamond",serif;font-size:56px;line-height:.6;color:var(--rose);height:22px}
+.rev p{margin:8px 0 14px;font-size:16px;flex:1}
+.rev small{color:var(--muted)}
+.rev .stars{color:var(--gold);letter-spacing:2px;font-size:14px}
+
+/* find */
+.find{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+.route{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.route figure{background:var(--chalk);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.route img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.route figcaption{padding:10px 12px;font-size:14px}
+.route figcaption b{display:block;font-size:15px}
+.info{background:var(--chalk);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:12px;align-content:start}
+.info .row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.info .row span{color:var(--muted)}
+.info .row b{text-align:right}
+.hours{display:grid;gap:2px;text-align:right}
+.hours .today{color:var(--rose)}
+#map{height:260px;border-radius:var(--r);border:1px solid var(--line);z-index:1}
+
+footer{background:var(--ink);color:#d3c8cc;padding:40px 0 110px;margin-top:30px}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
+footer .logo i,footer .logo b{color:#fff}
+.demo-box{background:#2a2125;border:1px dashed #5c4c52;border-radius:var(--r);padding:16px;font-size:14px}
+.demo-box b{color:var(--tape)}
+footer a{color:#fff}
+
+.overlay{position:fixed;inset:0;background:rgba(20,8,12,.5);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.show{opacity:1;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);opacity:0;pointer-events:none;width:min(480px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;background:var(--chalk);border-radius:var(--r-lg);z-index:110;padding:26px;transition:all .2s}
+.modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.modal h3{font-size:32px;margin-bottom:8px;padding-right:30px}
+.modal p{color:var(--muted)}
+.x{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:10px;display:grid;place-items:center}
+.x:hover{background:#efe7e0}
+.plist{display:grid;gap:6px;margin-top:14px}
+.plist div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.plist b{white-space:nowrap}
+.mbar{display:none}
+
+@media (max-width:1000px){
+  .hero-grid,.urgent,.find{grid-template-columns:1fr}
+  .services{grid-template-columns:repeat(2,1fr)}
+  .process{grid-template-columns:repeat(2,1fr)}
+  .works{grid-template-columns:repeat(3,1fr)}
+  .works figure:nth-child(1),.works figure:nth-child(6){grid-row:auto;aspect-ratio:3/4}
+  .reviews{grid-template-columns:repeat(2,1fr)}
+  nav.links{display:none}
+  .stage{max-width:520px;margin:0 auto;width:100%}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  header.top .wrap{height:60px;gap:10px}
+  .phone,.st-long,.hdr-max{display:none}
+  .logo b{font-size:16px}
+  .hero{padding:26px 0 10px}
+  .lead{font-size:17px}
+  .stage{padding-left:18px}
+  .htag{font-size:13px;padding:10px 12px 10px 26px}
+  .htag b{font-size:22px}
+  .htag.t1{left:0;top:10%}
+  .htag.t2{right:0}
+  .ph-cap{left:28px}
+  .services{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr}
+  .works{grid-template-columns:repeat(2,1fr)}
+  .reviews{grid-template-columns:1fr}
+  .route{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .route figcaption{font-size:12px;padding:8px}
+  .route figcaption b{font-size:13px}
+  .urgent{padding:28px 18px;border-radius:24px}
+  section{padding:44px 0}
+  .mbar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:10px;right:10px;bottom:10px;z-index:80;background:var(--ink);border-radius:18px;padding:6px;gap:6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+  .mbar a,.mbar button{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font-size:12px;font-weight:600;padding:8px 4px;border-radius:13px;text-decoration:none}
+  .mbar .r{background:var(--rose)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="ribbon"><div class="wrap">
+  <span><b>Концепт сайта</b> для «Портняжка». Цены для примера.</span>
+  <span>Сделал Александр Ли · <a href="https://t.me/DezmontDeXa" target="_blank" rel="noopener">Telegram</a></span>
+</div></div>
+
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Ателье Портняжка"><i>Ателье</i><b>ПОРТНЯЖКА</b></a>
+  <span class="status"><span class="dot" id="dot"></span><span id="stText">…</span></span>
+  <nav class="links"><a href="#services">Услуги и цены</a><a href="#urgent">Нужно к сроку</a><a href="#works">Работы</a><a href="#find">Как найти</a></nav>
+  <span class="sp"></span>
+  <a class="phone" href="tel:+79885095910">+7 988 509-59-10</a>
+  <button class="btn btn-rose btn-sm hdr-max" data-max>Написать в MAX</button>
+</div></header>
+<div class="tape" aria-hidden="true"></div>
+
+<main id="top">
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="kicker">Ремонт и пошив одежды · Черкасская, 129/1</span>
+    <h1>Подошьём, ушьём, <em>спасём любимую вещь</em></h1>
+    <p class="lead">Брюки по длине, платье по фигуре, новая молния в куртке. Ателье в цокольном этаже, рядом с остановкой «Героев Разведчиков».</p>
+    <div class="cta">
+      <button class="btn btn-rose" data-max>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        Узнать цену по фото
+      </button>
+      <a class="btn btn-w" href="#services">Цены на ремонт</a>
+    </div>
+    <div class="chips" aria-label="Частые задачи">
+      <span>Что нужно:</span>
+      <button class="chip" data-svc="0">подшить</button>
+      <button class="chip" data-svc="1">ушить</button>
+      <button class="chip" data-svc="2">заменить молнию</button>
+      <button class="chip" data-svc="3">зашить дырку</button>
+      <button class="chip" data-svc="5">сшить</button>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="ph"><img src="img/hero.jpg" alt="Платье в цветах, сшитое в ателье" fetchpriority="high"></div>
+    <div class="htag t1"><b>4,9 ★</b>2ГИС · 94 оценки</div>
+    <div class="htag t2"><b id="heroOpen">Открыто до 19:00</b>Цокольный этаж, <a href="#find">как пройти ↓</a></div>
+    <span class="ph-cap">Фото из карточки 2ГИС</span>
+  </div>
+</div></section>
+
+<section id="services" style="padding-top:30px"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="kicker">Услуги и цены</span><h2>Что случилось с вещью?</h2></div>
+    <p>Нажмите на карточку: внутри цены и что взять с собой на примерку.</p>
+  </div>
+  <div class="services" id="svcs"></div>
+  <p class="note">Цены и сроки в концепте для примера, на сайте будут ваши. Точную цену мастер называет, когда посмотрит вещь.</p>
+</div></section>
+
+<section id="urgent"><div class="wrap"><div class="urgent">
+  <div>
+    <span class="kicker">Нужно к сроку</span>
+    <h2>Платье к субботе? <em>Пришлите фото сегодня.</em></h2>
+    <p>Сфотографируйте вещь, напишите, что сделать и к какому дню. Мастер ответит в MAX, успеет ли, сколько это стоит и когда прийти на примерку.</p>
+    <div class="events"><span>свадьба</span><span>выпускной</span><span>собеседование</span><span>утренник</span><span>отпуск</span></div>
+    <ol class="steps">
+      <li><b>1</b><span>Нажмите кнопку, откроется чат ателье в MAX.</span></li>
+      <li><b>2</b><span>Фото вещи + что сделать + к какому дню.</span></li>
+      <li><b>3</b><span>Получите цену и срок, приходите на примерку.</span></li>
+    </ol>
+    <button class="btn btn-rose" data-max>Отправить фото в MAX</button>
+    <div><button class="replay" id="replay">Показать ещё раз, как это выглядит</button></div>
+  </div>
+  <div class="chatbox" aria-label="Пример переписки">
+    <div class="chat-head"><span class="av">П</span><div><b>Ателье Портняжка</b><br><small style="color:#6F6266">MAX</small></div></div>
+    <div class="chat" id="chat">
+      <div class="msg me"><div class="thumb"></div>Здравствуйте! Нужно подшить джинсы и оставить родной шов. Успеете к пятнице?</div>
+      <div class="msg them">Здравствуйте! Успеем. Приходите, наколем длину по вашей обуви, это 5 минут.</div>
+      <div class="msg them"><b>600 ₽, готово в четверг после 15:00.</b> Работаем до 19:00.</div>
+      <div class="msg me">Отлично, зайду сегодня после работы</div>
+    </div>
+  </div>
+</div></div></section>
+
+<section id="how" style="padding-top:20px"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="kicker">Как проходит заказ</span><h2>От примерки до готовой вещи</h2></div>
+  </div>
+  <div class="process">
+    <div class="step"><div class="n">01</div><h3>Приносите вещь</h3><p>В часы работы. Если вещь садится по фигуре, лучше сразу надеть её или взять обувь, с которой будете носить.</p></div>
+    <div class="step"><div class="n">02</div><h3>Мастер закалывает</h3><p>Отмечает длину и посадку булавками и сразу называет цену и срок.</p></div>
+    <div class="step"><div class="n">03</div><h3>Примерка, если нужна</h3><p>Напишем в MAX, когда приходить. Сложные вещи проверяем на вас до последнего шва.</p></div>
+    <div class="step"><div class="n">04</div><h3>Забираете</h3><p>Оплата наличными или переводом с карты.</p></div>
+  </div>
+  <div class="kids"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="6" r="2.5"/><circle cx="16" cy="6" r="2.5"/><circle cx="12" cy="13" r="6"/><circle cx="10" cy="12" r=".6" fill="currentColor"/><circle cx="14" cy="12" r=".6" fill="currentColor"/></svg><span>Можно с детьми. Из отзыва: «пока родители примеряют одежду, дети играют» с плюшевыми игрушками.</span></div>
+</div></section>
+
+<section id="works"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="kicker">Работы</span><h2>Из нашего ателье</h2></div>
+    <p>Фото из карточки ателье в 2ГИС.</p>
+  </div>
+  <div class="works">
+    <figure><img src="img/w-gold.jpg" alt="Вечернее платье со шнуровкой на манекене" loading="lazy"><figcaption>Вечернее платье</figcaption></figure>
+    <figure><img src="img/w-black.jpg" alt="Чёрное платье на клиентке" loading="lazy"><figcaption>Платье по фигуре</figcaption></figure>
+    <figure><img src="img/w-velvet.jpg" alt="Бархатное платье на манекене" loading="lazy"><figcaption>Бархатное платье</figcaption></figure>
+    <figure><img src="img/w-red.jpg" alt="Красная блузка" loading="lazy"><figcaption>Блузка</figcaption></figure>
+    <figure><img src="img/w-white.jpg" alt="Белый корсаж с кружевом" loading="lazy"><figcaption>Корсаж</figcaption></figure>
+    <figure><img src="img/w-kids.jpg" alt="Нарядный комплект" loading="lazy"><figcaption>Нарядный комплект</figcaption></figure>
+    <figure><img src="img/w-denim.jpg" alt="Джинсовая юбка на пуговицах" loading="lazy"><figcaption>Джинсовая юбка</figcaption></figure>
+    <figure><img src="img/w-curtains.jpg" alt="Шторы и тюль" loading="lazy"><figcaption>Шторы и тюль</figcaption></figure>
+  </div>
+  <div class="shop"><b>Ткани и фурнитура на месте</b><span style="color:var(--muted)">В ателье продаются ткани и швейная фурнитура, подобрать можно прямо на примерке.</span></div>
+</div></section>
+
+<section id="reviews" style="padding-top:20px"><div class="wrap">
+  <div class="sec-head"><div><span class="kicker">Отзывы из 2ГИС</span><h2>Что говорят клиенты</h2></div><p>4,9 из 5, 94 оценки в 2ГИС.</p></div>
+  <div class="reviews">
+    <div class="rev"><div class="q">“</div><p>Любимое платье, которое я прожгла утюгом, отремонтировали буквально за полчаса.</p><div class="stars">★★★★★</div><small>Милена В., июнь 2025</small></div>
+    <div class="rev"><div class="q">“</div><p>Самое лучшее ателье на районе! Если надо сделать срочно, сделают.</p><div class="stars">★★★★★</div><small>Катерина И., февраль 2026</small></div>
+    <div class="rev"><div class="q">“</div><p>Подшить, ушить, заменить молнию, резинку, все что хотите.</p><div class="stars">★★★★★</div><small>Елена С., сентябрь 2025</small></div>
+    <div class="rev"><div class="q">“</div><p>Подшивала джинсы и кожаную куртку ремонтировала. Работа была выполнена качественно.</p><div class="stars">★★★★★</div><small>Наталья Ц., октябрь 2026</small></div>
+  </div>
+</div></section>
+
+<section id="find"><div class="wrap">
+  <div class="sec-head">
+    <div><span class="kicker">Как нас найти</span><h2>Три шага до примерочной</h2></div>
+    <p>Ателье в цокольном этаже, с улицы его не видно. Вот как дойти.</p>
+  </div>
+  <div class="find">
+    <div class="route">
+      <figure><img src="img/facade.jpg" alt="Спуск в цокольный этаж под вывеской Автозапчасти" loading="lazy"><figcaption><b>1. Спуск вниз</b>Под вывеской «Автозапчасти», справа красная вывеска «Портняжка»</figcaption></figure>
+      <figure><img src="img/corridor.jpg" alt="Коридор в цокольном этаже" loading="lazy"><figcaption><b>2. По коридору</b>До двери с надписью «Ателье»</figcaption></figure>
+      <figure><img src="img/door.jpg" alt="Вход в ателье с манекеном" loading="lazy"><figcaption><b>3. Манекен у двери</b>И табличка «Портняжка» с часами</figcaption></figure>
+    </div>
+    <div class="info">
+      <div id="map" aria-label="Карта"></div>
+      <div class="row"><span>Адрес</span><b>Черкасская ул., 129/1, цоколь</b></div>
+      <div class="row"><span>Рядом</span><b>магазин «Крабика», остановка «Героев Разведчиков»</b></div>
+      <div class="row"><span>Часы</span><div class="hours" id="hours"></div></div>
+      <div class="row"><span>Телефон</span><a href="tel:+79885095910"><b>+7 988 509-59-10</b></a></div>
+      <div class="row"><span>Оплата</span><b>Наличные, перевод с карты</b></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-ink btn-sm" target="_blank" rel="noopener" href="https://yandex.ru/maps/?rtext=~45.06651,39.035689&rtt=pd">Маршрут</a>
+        <a class="btn btn-w btn-sm" target="_blank" rel="noopener" href="https://2gis.ru/krasnodar/firm/70000001029032785">2ГИС</a>
+        <a class="btn btn-w btn-sm" target="_blank" rel="noopener" href="https://yandex.ru/maps/org/portnyazhka/214164268542/">Яндекс Карты</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div>
+    <span class="logo"><i>Ателье</i><b>ПОРТНЯЖКА</b></span>
+    <p style="margin-top:14px;max-width:42ch">Ремонт и пошив одежды, подгонка по фигуре, замена молний, шторы. Ткани и швейная фурнитура. Краснодар, Черкасская ул., 129/1.</p>
+  </div>
+  <div class="demo-box"><b>Это демо.</b> Сделано, чтобы показать идею: цены сразу на сайте, «цена по фото» в MAX для срочных заказов, понятный путь до двери в цоколе.<br><br>Александр Ли · <a href="https://t.me/DezmontDeXa" target="_blank" rel="noopener">@DezmontDeXa</a> · <a href="tel:+79147765705">+7 914 776-57-05</a></div>
+</div></footer>
+
+<nav class="mbar" aria-label="Быстрые действия">
+  <a href="tel:+79885095910"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Позвонить</a>
+  <button class="r" data-max><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Фото в MAX</button>
+  <a href="#find"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Как найти</a>
+</nav>
+
+<div class="overlay" id="ov"></div>
+<div class="modal" id="md" role="dialog" aria-modal="true"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+// Часы по табличке на двери ателье: [открытие, закрытие], индекс 0 = воскресенье
+const HOURS=[[10,15],[9,19],[9,19],[9,19],[9,19],[9,19],[10,18]];
+const DAYS=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const ICO={
+ hem:'<path d="M6 3h12l-1 18h-4l-1-10-1 10H7z"/><path d="M6.6 17h4M13.4 17h4" stroke-dasharray="1.5 1.5"/>',
+ fit:'<path d="M9 3h6l3 5-2 2v11H8V10L6 8z"/><path d="M12 6v15" stroke-dasharray="1.5 2"/>',
+ zip:'<path d="M12 2v20"/><path d="M10 5h4M10 8h4M10 11h4"/><rect x="9" y="13" width="6" height="5" rx="1.5"/>',
+ needle:'<path d="M4 20 18 6"/><ellipse cx="19" cy="5" rx="1.6" ry="2.6" transform="rotate(45 19 5)"/><path d="M4 20c4-1 6-5 3-7s-4 3 1 4 9-2 12-6"/>',
+ coat:'<path d="M8 3 4 6v15h5V9M16 3l4 3v15h-5V9"/><path d="M8 3l4 5 4-5M12 8v13"/>',
+ dress:'<path d="M9 3h6l-1 4 4 14H6l4-14z"/><path d="M10 7h4"/>'
+};
+const SVC=[
+ {i:'hem',t:'Подшить',from:400,d:'Брюки, джинсы, юбки, платья, рукава. Можно с сохранением фабричного шва.',list:[['Брюки','от 400 ₽'],['Джинсы с родным швом','от 600 ₽'],['Юбка','от 500 ₽'],['Платье','от 700 ₽'],['Рукава','от 500 ₽']],bring:'Вещь и обувь, с которой будете её носить.',time:'обычно 1–2 дня'},
+ {i:'fit',t:'Ушить и подогнать',from:600,d:'По фигуре, в поясе, по боковым швам. Бывает и с 52 на 42 размер.',list:[['Брюки в поясе','от 600 ₽'],['Брюки по боковым','от 800 ₽'],['Платье по фигуре','от 1 200 ₽'],['Пиджак','от 1 800 ₽']],bring:'Вещь. Наденьте её на примерку, мастер заколет посадку.',time:'2–4 дня, с примеркой'},
+ {i:'zip',t:'Заменить молнию',from:500,d:'Джинсы, юбки, платья, куртки, пуховики. Молнию подберём на месте.',list:[['Джинсы, брюки','от 500 ₽'],['Юбка, платье','от 600 ₽'],['Куртка','от 1 200 ₽'],['Пуховик','от 1 500 ₽']],bring:'Вещь. Молнию можно подобрать в ателье.',time:'1–3 дня'},
+ {i:'needle',t:'Дырки и швы',from:250,d:'Порвалось, распоролось, прожгли утюгом. Сделаем так, что место ремонта будет почти не видно.',list:[['Распоровшийся шов','от 250 ₽'],['Дырка на джинсах','от 400 ₽'],['Прожог, штопка','от 500 ₽'],['Заменить резинку','от 300 ₽']],bring:'Вещь, по возможности чистую.',time:'часто в тот же день'},
+ {i:'coat',t:'Пальто и куртки',from:700,d:'Перешить замок, укоротить рукава, убрать воротник, починить кожаную куртку.',list:[['Укоротить рукава','от 900 ₽'],['Заменить подклад','от 2 000 ₽'],['Убрать или заменить воротник','от 700 ₽'],['Ремонт кожаной куртки','от 800 ₽']],bring:'Вещь. Для рукавов наденьте то, что носите под ней.',time:'3–5 дней'},
+ {i:'dress',t:'Сшить и шторы',from:150,d:'Платья, юбки, брюки по вашим меркам. Подшить и сшить шторы, тюль.',list:[['Юбка','от 2 500 ₽'],['Платье','от 4 500 ₽'],['Подшить шторы, тюль','от 150 ₽ за метр'],['Пошив штор','от 300 ₽ за метр']],bring:'Фото фасона или образец. Ткань можно подобрать на месте.',time:'от недели'}
+];
+const fmt=n=>n.toLocaleString('ru-RU')+' ₽';
+const svgI=k=>`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICO[k]}</svg>`;
+$('#svcs').innerHTML=SVC.map((s,k)=>`<button class="svc" data-svc="${k}"><div class="svc-top"><span class="ico">${svgI(s.i)}</span></div><h3>${s.t}</h3><p>${s.d}</p><span class="price"><b>от ${fmt(s.from)}</b><span class="more">цены →</span></span></button>`).join('');
+
+const ov=$('#ov'),md=$('#md');
+function openModal(h){md.innerHTML='<button class="x" data-close aria-label="Закрыть"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>'+h;md.classList.add('show');ov.classList.add('show')}
+function closeAll(){md.classList.remove('show');ov.classList.remove('show')}
+ov.onclick=closeAll;md.addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeAll()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+function maxModal(){openModal(`<h3>Чат ателье в MAX</h3><p>В рабочей версии кнопка сразу открывает чат ателье в MAX с готовым текстом «Здравствуйте! Хочу узнать цену и срок, отправляю фото». Остаётся прикрепить фото вещи и написать, что сделать.</p><p style="margin-top:10px">В концепте переход отключён, чтобы ателье не писали с демо-страницы.</p><button class="btn btn-rose" style="margin-top:18px" data-close>Понятно</button>`)}
+document.addEventListener('click',e=>{if(e.target.closest('[data-max]')){maxModal();return}
+  const b=e.target.closest('[data-svc]');if(!b)return;const s=SVC[b.dataset.svc];
+  openModal(`<h3>${s.t}</h3><p>${s.d} Срок: ${s.time}.</p><div class="plist">${s.list.map(([a,p])=>`<div><span>${a}</span><b>${p}</b></div>`).join('')}</div><p style="margin-top:14px"><b style="color:#1D1519">Что взять:</b> ${s.bring}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px"><button class="btn btn-rose btn-sm" data-max>Цена по фото в MAX</button><a class="btn btn-w btn-sm" href="#find" data-close>Как найти</a></div><p style="font-size:13px;margin-top:12px">Цены и сроки для примера.</p>`)});
+
+const nowKrd=()=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Moscow',hour12:false,weekday:'short',hour:'2-digit',minute:'2-digit'}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return {d:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday')),h:+g('hour')%24,m:+g('minute')}};
+function status(){const {d,h,m}=nowKrd();const [o,c]=HOURS[d];const open=h>=o&&h<c;const left=c*60-(h*60+m);
+  const nd=h<o?d:(d+1)%7;const nx=HOURS[nd][0];const when=h<o?`сегодня в ${nx}:00`:(nd===(d+1)%7?`завтра в ${nx}:00`:`в ${nx}:00`);
+  $('#dot').classList.toggle('closed',!open);
+  $('#stText').innerHTML=open?(left<=60?`Открыто · закроемся через ${left} мин`:`Открыто<span class="st-long"> · до ${c}:00</span>`):`Закрыто<span class="st-long"> · откроемся ${when}</span>`;
+  $('#heroOpen').textContent=open?`Открыто до ${c}:00`:`Откроемся ${when}`;
+  $('#hours').innerHTML=[['Пн–Пт','9:00–19:00',d>=1&&d<=5],['Сб','10:00–18:00',d===6],['Вс','10:00–15:00',d===0]].map(([a,b,t])=>`<b class="${t?'today':''}">${a} ${b}</b>`).join('')}
+status();setInterval(status,60000);
+
+function playChat(){const ms=[...document.querySelectorAll('#chat .msg')];ms.forEach(m=>m.classList.remove('show'));ms.forEach((m,i)=>setTimeout(()=>m.classList.add('show'),400+i*900))}
+let played=false;new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!played){played=true;playChat()}}),{threshold:.4}).observe($('#chat'));
+$('#replay').onclick=playChat;
+
+try{const P=[45.06651,39.035689];const map=L.map('map',{scrollWheelZoom:false}).setView(P,16);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+  L.marker(P,{icon:L.divIcon({className:'',html:'<div style="background:#B3123F;border:2px solid #fff;width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[30,30],iconAnchor:[15,30]})}).addTo(map).bindPopup('<b>Портняжка</b><br>Черкасская, 129/1, цоколь')}catch(e){$('#map').innerHTML='<p style="padding:20px;color:#6F6266">Карта не загрузилась</p>'}
+</script>
+</body>
+</html>

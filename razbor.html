@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Разбор карточек ателье «Портняжка»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#B3123F;--rose-d:#8C0D31;--ink:#1D1519;--plum:#2A1C22;--linen:#F5EFE7;--chalk:#FFFDF9;--gold:#C79A3B;--tape:#EBC75A;--muted:#6F6266;--line:#E6DCD1;--ok:#1E7F4E;--warn:#B06E00;--bad:#B3261E}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip}
+body{font-family:"Golos Text",system-ui,sans-serif;background:var(--linen);color:var(--ink);line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+a{color:inherit}
+img{max-width:100%}
+.top{background:var(--ink);color:#dcd3d6;font-size:13px;padding:9px 0}
+.top a{color:#fff;font-weight:600}
+.tape{height:12px;background:repeating-linear-gradient(90deg,rgba(29,21,25,.75) 0 1px,transparent 1px 10px) bottom/100% 4px no-repeat,repeating-linear-gradient(90deg,rgba(29,21,25,.9) 0 1.5px,transparent 1.5px 50px) bottom/100% 8px no-repeat,var(--tape)}
+header.hero{padding:48px 0 30px}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--rose)}
+header h1{font-size:clamp(38px,6vw,62px);margin:12px 0 14px}
+header h1 span{color:var(--rose);font-style:italic}
+header p{font-size:18px;color:#43363b;max-width:62ch}
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0 8px}
+.sc{background:var(--chalk);border:1px solid var(--line);border-radius:16px;padding:18px}
+.sc b{display:block;font-family:"Cormorant Garamond",serif;font-size:40px;line-height:1;margin:6px 0}
+.sc small{color:var(--muted)}
+.sc.bad b{color:var(--bad)}.sc.ok b{color:var(--ok)}
+.compare{background:var(--chalk);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:26px 0}
+.compare table{width:100%;border-collapse:collapse;font-size:15px}
+.compare th,.compare td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.compare th{background:#FAF5EE;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.compare tr:last-child td{border-bottom:0}
+.y{color:var(--ok);font-weight:600}.n{color:var(--bad);font-weight:600}
+h2{font-size:36px;margin:44px 0 16px}
+.find{background:var(--chalk);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:12px;display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.find>*:not(.num){grid-column:2;min-width:0}
+.num{grid-column:1;grid-row:1/span 9;width:40px;height:40px;border-radius:50%;background:var(--rose);color:#fff;display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-weight:700;font-size:22px}
+.find h3{font-size:24px;line-height:1.15;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tag{font-family:"Golos Text",sans-serif;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;letter-spacing:0}
+.tag.hi{background:#FBE3E3;color:var(--bad)}.tag.mid{background:#FFF0D6;color:var(--warn)}.tag.lo{background:#EEECE6;color:#5d5a52}
+.find p{color:#43363b}
+.fix{background:#EEF7F1;border-radius:10px;padding:10px 12px;font-size:15px}
+.fix b{color:var(--ok)}
+.shot{display:block;margin-top:4px;border-radius:12px;border:1px solid var(--line);width:100%;max-width:380px;height:auto}
+.shot-cap{font-size:13px;color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums;background:#F6EEF0;border-radius:10px;padding:10px 12px;font-size:15px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.mono b{color:var(--bad)}
+.offer{background:var(--plum);color:#fff;border-radius:24px;padding:30px;margin:44px 0 20px}
+.offer h2{margin:0 0 12px;color:#fff}
+.offer ul{list-style:none;display:grid;gap:8px;margin:14px 0 20px}
+.offer li{padding-left:26px;position:relative}
+.offer li:before{content:"";position:absolute;left:0;top:6px;width:14px;height:14px;border-radius:50%;border:3px solid var(--tape)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:600;text-decoration:none;background:var(--rose);color:#fff}
+.btn.o{background:transparent;border:2px solid #fff;color:#fff}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+footer{padding:20px 0 50px;color:var(--muted);font-size:14px}
+@media (max-width:640px){.wrap{padding:0 16px}.score{grid-template-columns:1fr}.find{grid-template-columns:1fr;padding:18px 16px}.find>*:not(.num){grid-column:1}.num{grid-row:auto}.compare{overflow-x:auto}.compare table{min-width:540px}.offer{padding:22px 18px}h2{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">Разбор подготовил Александр Ли для ателье «Портняжка», 28 октября 2026 · <a href="index.html">Концепт сайта →</a></div></div>
+<div class="tape" aria-hidden="true"></div>
+
+<header class="hero"><div class="wrap">
+  <span class="kicker">Ателье «Портняжка» · Черкасская, 129/1</span>
+  <h1>Яндекс говорит людям, что вы закрыты, <span>хотя вы работаете</span></h1>
+  <p>Посмотрел, как ателье выглядит в 2ГИС и Яндекс Картах. Клиенты вас очень хвалят, но в карточках разные часы и разные телефоны, а в Яндексе с понедельника по пятницу после 10 утра стоит «Закрыто до завтра». Всё ниже исправляется за неделю и почти всё бесплатно.</p>
+  <div class="score">
+    <div class="sc ok"><small>Рейтинг в 2ГИС</small><b>4,9</b><small>94 оценки, 85 отзывов</small></div>
+    <div class="sc bad"><small>Яндекс по будням</small><b>9:00–10:00</b><small>после 10 утра «Закрыто до завтра»</small></div>
+    <div class="sc bad"><small>Ответов на отзывы</small><b>0</b><small>из 48 последних в 2ГИС</small></div>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <div class="compare"><table>
+    <tr><th></th><th>2ГИС</th><th>Яндекс Карты</th><th>Табличка на двери</th></tr>
+    <tr><td>Рейтинг</td><td>4,9 · 94 оценки</td><td>4,8 · 19 оценок</td><td></td></tr>
+    <tr><td>Карточка подтверждена</td><td class="n">Плашка «давно не обновляла данные»</td><td class="n">Нет, «Вы владелец?»</td><td></td></tr>
+    <tr><td>Пн–Пт</td><td>9:00–19:00</td><td class="n">9:00–10:00</td><td>9:00–19:00</td></tr>
+    <tr><td>Сб / Вс</td><td class="n">9:00–18:00 / 9:00–15:00</td><td>10:00–18:00 / 10:00–15:00</td><td>10:00–18:00 / 10:00–15:00</td></tr>
+    <tr><td>Телефон</td><td class="n">+7 989 263-69-80</td><td>+7 988 509-59-10</td><td>…509 59 10</td></tr>
+    <tr><td>Главная рубрика</td><td>Швейные ателье</td><td class="n">Меховое ателье</td><td></td></tr>
+    <tr><td>Цены</td><td class="n">Нет</td><td class="n">Нет</td><td></td></tr>
+    <tr><td>Ответы на отзывы</td><td class="n">0 из 48</td><td class="n">Нельзя, карточка не ваша</td><td></td></tr>
+    <tr><td>Сайт</td><td class="n">Нет</td><td class="n">Нет</td><td></td></tr>
+  </table></div>
+
+  <h2>Что нашёл</h2>
+
+  <div class="find"><span class="num">1</span>
+    <h3>Яндекс показывает «Закрыто» почти весь рабочий день <span class="tag hi">важно</span></h3>
+    <p>В графике Яндекс Карт с понедельника по пятницу указано 09:00–10:00. Я смотрел карточку в среду в 14:35, она показывала «Закрыто до завтра». Так будет каждый будний день с 10 утра до вечера. Человек, который ищет «ателье рядом», видит, что вы закрыты, и идёт к соседям, которые «Открыто до 20:00».</p>
+    <div class="mono"><span>Пн–Пт</span><b>09:00–10:00</b><span>Сб</span><span>10:00–18:00</span><span>Вс</span><span>10:00–15:00</span></div>
+    <div class="fix"><b>Что сделать:</b> исправить график в Яндексе на 9:00–19:00. Быстрее всего это делается из подтверждённой карточки, см. пункт 3.</div>
+  </div>
+
+  <div class="find"><span class="num">2</span>
+    <h3>Часы и телефон разные в 2ГИС, Яндексе и на двери <span class="tag hi">важно</span></h3>
+    <p>На табличке у двери: суббота и воскресенье с 10:00. В 2ГИС: с 9:00. Кто придёт в субботу в 9:15 по карте, упрётся в закрытую дверь. Телефоны тоже разные: в 2ГИС +7 989 263-69-80, в Яндексе и на табличке +7 988 509-59-10. Если один из номеров уже не ваш, часть звонков просто теряется.</p>
+    <img class="shot" src="img/sign.jpg" alt="Табличка с режимом работы на двери ателье" loading="lazy">
+    <span class="shot-cap">Табличка на двери, фото из карточки 2ГИС</span>
+    <div class="fix"><b>Что сделать:</b> одно расписание и один рабочий номер везде: дверь, 2ГИС, Яндекс, сайт.</div>
+  </div>
+
+  <div class="find"><span class="num">3</span>
+    <h3>Карточка в Яндексе ничья и записана как «меховое ателье» <span class="tag hi">важно</span></h3>
+    <p>На карточке висит «Вы владелец этой организации?». Пока она не подтверждена, вы не можете поправить часы, ответить на отзывы, добавить цены и фото. Главная рубрика там «Меховое ателье», а по ремонту одежды вас показывают хуже. Рядом Яндекс рекомендует «Ателье по ремонту и пошиву одежды» (5,0, 80 оценок, акция «Подшить брюки от 800 рублей») и «Новый образ» (5,0, 165 оценок).</p>
+    <div class="fix"><b>Что сделать:</b> подтвердить карточку через Яндекс Бизнес, главной рубрикой поставить «Ателье по пошиву одежды», добавить «Ремонт одежды». Бесплатно, нужен звонок или СМС на номер ателье.</div>
+  </div>
+
+  <div class="find"><span class="num">4</span>
+    <h3>2ГИС пишет каждому: «Компания давно не обновляла данные» <span class="tag hi">важно</span></h3>
+    <p>Эту строку видит каждый, кто открывает карточку, а в разделе «Актуальность данных» стоит «не подтверждена». У соседних ателье в том же списке написано «Данные актуальны». Выбирая между ними, человек идёт туда, где написано, что всё в порядке.</p>
+    <div class="fix"><b>Что сделать:</b> зайти в личный кабинет 2ГИС и подтвердить данные. Бесплатно, 10 минут.</div>
+  </div>
+
+  <div class="find"><span class="num">5</span>
+    <h3>85 отзывов, ни одного ответа, даже на единственный злой <span class="tag mid">заметно</span></h3>
+    <p>Люди пишут «самое лучшее ателье на районе», «спасение для вашей одежды», «золотые руки». Ни на один из 48 последних отзывов в 2ГИС нет ответа. Единственный отзыв с одной звездой (ноябрь 2024, про «дорого» и квитанции) тоже висит без ответа, и его читают все, кто листает отзывы.</p>
+    <div class="fix"><b>Что сделать:</b> ответить на все отзывы, на негативный спокойно и по делу. Дальше отвечать на новые, 15 минут в неделю, могу взять это на себя.</div>
+  </div>
+
+  <div class="find"><span class="num">6</span>
+    <h3>Нет цен, и за вас на вопросы отвечает робот <span class="tag mid">заметно</span></h3>
+    <p>Вкладка «Цены» в 2ГИС пустая. В блоке «Вопросы о месте» висят «От чего зависит цена работ?», «Есть ли срочный ремонт?», «Есть ли примерка при ремонте?», а отвечает на них ИИ-помощник 2ГИС, не вы. Конкурент в Яндексе прямо в рекомендациях пишет «Подшить брюки от 800 рублей».</p>
+    <div class="fix"><b>Что сделать:</b> 10–15 позиций с ценой «от»: подшить брюки и джинсы, ушить, заменить молнию, зашить, пошив. Ответить на вопросы о месте: срочный ремонт, примерка.</div>
+  </div>
+
+  <div class="find"><span class="num">7</span>
+    <h3>На вашей карточке рекламируется другое ателье <span class="tag mid">заметно</span></h3>
+    <p>В блоке «Похожие организации» прямо под вашим адресом стоит реклама: «Ателье по пошиву и ремонту одежды. Швейные работы любой сложности. Быстро и качественно» с кнопкой «Позвонить». Ниже ещё четыре ателье и магазина тканей.</p>
+    <div class="fix"><b>Что сделать:</b> заполненная карточка с ценами и ответами перетягивает внимание на вас. В платных пакетах 2ГИС можно убрать рекламу конкурентов со своей карточки, цену стоит уточнить отдельно.</div>
+  </div>
+
+  <div class="find"><span class="num">8</span>
+    <h3>У входа вывески другого ателье заметнее ваших <span class="tag lo">просто</span></h3>
+    <p>Вход общий, спуск под вывеской «Автозапчасти». Слева на этом спуске два жёлтых баннера «Каприз. Ателье: ремонт, пошив одежды, замена молнии». Ваша вывеска «Портняжка» справа, узкая и вертикальная. В 2ГИС из 41 фото снаружи только 3 и ни одного фото внутри, поэтому новый клиент легко зайдёт не в ту дверь.</p>
+    <img class="shot" src="img/facade.jpg" alt="Общий вход в цокольный этаж с вывесками" loading="lazy">
+    <div class="fix"><b>Что сделать:</b> первым фото в карточках поставить вход со стрелкой «Портняжка справа», плюс фото коридора и двери. В комментарий к адресу дописать, как найти именно вашу дверь. На сайте сделал такой блок.</div>
+  </div>
+
+  <div class="find"><span class="num">9</span>
+    <h3>В Яндексе в 4 раза меньше оценок, чем у соседей <span class="tag lo">просто</span></h3>
+    <p>У вас в Яндексе 19 оценок, у ателье из рекомендаций 80 и 165. В 2ГИС у вас 94, то есть довольных клиентов хватает, их просто никто не просит оценить вас в Яндексе.</p>
+    <div class="fix"><b>Что сделать:</b> QR-код у примерочной «Оцените нас в Яндексе» и короткая просьба, когда клиент забирает вещь. Обычно это даёт 5–10 новых оценок в месяц.</div>
+  </div>
+
+  <div class="offer">
+    <h2>Что предлагаю</h2>
+    <p>Беру на себя всё из списка, от вас нужно только подтвердить карточки по коду из СМС.</p>
+    <ul>
+      <li>Подтвердить карточки в 2ГИС и Яндексе, выставить одни часы, один телефон, правильные рубрики и цены</li>
+      <li>Ответить на все отзывы и дальше отвечать на новые</li>
+      <li>Поставить хорошие фото: вход, коридор, дверь, примерочная, работы</li>
+      <li>Сайт ателье со ссылкой из обеих карточек: <a href="index.html" style="color:#fff">вот концепт</a></li>
+      <li>Раз в месяц отчёт: сколько людей посмотрели карточку, позвонили и построили маршрут</li>
+    </ul>
+    <p style="margin-bottom:18px">Разбор бесплатный. Стоимость работ обсудим, она небольшая.</p>
+    <div class="btns">
+      <a class="btn" href="https://t.me/DezmontDeXa" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a class="btn o" href="tel:+79147765705">+7 914 776-57-05</a>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap">Данные из открытых карточек 2ГИС и Яндекс Карт на 28 октября 2026. Фото из карточки 2ГИС. Александр Ли.</div></footer>
+</body>
+</html>
